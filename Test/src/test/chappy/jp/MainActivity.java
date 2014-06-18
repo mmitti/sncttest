@@ -11,65 +11,54 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
+		//コメント　bymmitti
+		//一応解説を付けてみましたがわかりにくいと思います。
+		//わかりにくい、分からない、疑問点は早めに知らせてください
 public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
+//ActivityではViewを検索することができます
+//IDはXMLで定義したものと同じ名前のものが自動生成されますのでそれを利用します
+//なお、レイアウトで@+id/button3の+は新規作成の意味です。
+		
+		Button but = (Button)this.findViewById(R.id.button3);
+		but.setText("ハズレ");
+		
+		but.setOnClickListener(new OnClickListener() {
+//これは無名クラス　内部クラスと呼ばれるものです
+//本来クラス名が必要ですがクラス名なしにその場で定義して渡すことができます
 
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+			@Override
+			public void onClick(View v) {
+				((Button)v).setText("アタリ");
+				Toast.makeText(MainActivity.this, "テスト", Toast.LENGTH_LONG).show();
+//このThisはちょっとややこしいですがthisそのものはThisポインターと同じものです
+//しかし、ここでThisを使うとこのクラス　つまりOnClickListerを継承した無名のクラスを指してしまいます。
+//その外側のThis特別するためMainActivity.thisを使います
+			}
+		});
+
+//上のコードは下のコードと同じ意味です(class MyClickは下を参照
+/*		OnClickListener ocl = new MyClick();
+		but.setOnClickListener(ocl);
+*/
+
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
+	
+	class MyClick implements OnClickListener{
+//implementsはインターフェースを実装するという意味です。イメージとしては継承しているみたいなものです
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			Button but = (Button)rootView.findViewById(R.id.button3);
-			but.setText("ハズレ");
-			but.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					((Button)v).setText("アタリ");
-					Toast.makeText(getActivity(), "テスト", Toast.LENGTH_LONG).show();
-				}
-			});
-			return rootView;
+		public void onClick(View v) {
+			//ボタンが押された時の処理
 		}
+		
 	}
+
 
 }
