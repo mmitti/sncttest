@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
 				public void onClick(View v) {
 					((Button)v).setText("アタリ");
 					Toast.makeText(getActivity(), "テスト", Toast.LENGTH_LONG).show();
+
 				}
 			});
 			return rootView;
