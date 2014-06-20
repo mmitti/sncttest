@@ -1,6 +1,7 @@
 package test.chappy.jp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +33,8 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				calc(1);
+				Intent intent = new Intent(MainActivity.this,ImageActivity.class);
+				startActivity(intent);
 			}
 		});
 		button[2].setOnClickListener(new OnClickListener() {
