@@ -1,7 +1,6 @@
 package test.chappy.jp;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 		//コメント　bymmitti
 		//一応解説を付けてみましたがわかりにくいと思います。
@@ -20,13 +20,70 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+	
+		//演算用ボタン
+		Button[] button = new Button[5];
+		button[1] = (Button)this.findViewById(R.id.button1);
+		button[2] = (Button)this.findViewById(R.id.button2);
+		button[3] = (Button)this.findViewById(R.id.button3);
+		button[4] = (Button)this.findViewById(R.id.button4);
 		
+		button[1].setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				calc(1);
+			}
+		});
+		button[2].setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				calc(2);
+			}
+		});
+		button[3].setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				calc(3);
+			}
+		});
+		button[4].setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				calc(4);
+			}
+		});
+	}
+	
+	void calc(int ope){
+		//数値入力フォーム
+		final EditText[] edit = new EditText[3];
+		edit[1] = (EditText)this.findViewById(R.id.editText1);
+		edit[2] = (EditText)this.findViewById(R.id.editText2);
+		String str1 = edit[1].getText().toString();
+		String str2 = edit[2].getText().toString();
+		int ans = 0;
+		switch(ope){
+		case 1:
+			ans = Integer.parseInt(str1) + Integer.parseInt(str2);break;
+		case 2:
+			ans = Integer.parseInt(str1) - Integer.parseInt(str2);break;
+		case 3:
+			ans = Integer.parseInt(str1) * Integer.parseInt(str2);break;
+		case 4:
+			ans = Integer.parseInt(str1) / Integer.parseInt(str2);break;
+			
+		}
+		Toast.makeText(MainActivity.this, String.valueOf(ans), Toast.LENGTH_LONG).show();
+	}
+}
+
+
 		
 //ActivityではViewを検索することができます
 //IDはXMLで定義したものと同じ名前のものが自動生成されますのでそれを利用します
 //なお、レイアウトで@+id/button3の+は新規作成の意味です。
 		
-		Button but = (Button)this.findViewById(R.id.button3);
+		/*Button but = (Button)this.findViewById(R.id.button3);
 		but.setText("ハズレ");
 		
 		but.setOnClickListener(new OnClickListener() {
@@ -44,9 +101,9 @@ public class MainActivity extends Activity {
 		});
 
 //上のコードは下のコードと同じ意味です(class MyClickは下を参照
-/*		OnClickListener ocl = new MyClick();
+		OnClickListener ocl = new MyClick();
 		but.setOnClickListener(ocl);
-*/
+
 
 	}
 	
@@ -58,7 +115,4 @@ public class MainActivity extends Activity {
 			//ボタンが押された時の処理
 		}
 		
-	}
-
-
-}
+	}*/
