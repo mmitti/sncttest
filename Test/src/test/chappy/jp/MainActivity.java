@@ -24,17 +24,24 @@ public class MainActivity extends Activity {
 	
 		//演算用ボタン
 		Button[] button = new Button[5];
+		button[0] = (Button)this.findViewById(R.id.button0);
 		button[1] = (Button)this.findViewById(R.id.button1);
 		button[2] = (Button)this.findViewById(R.id.button2);
 		button[3] = (Button)this.findViewById(R.id.button3);
 		button[4] = (Button)this.findViewById(R.id.button4);
 		
+		button[0].setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,ImageActivity.class);
+				startActivity(intent);
+			}
+		});
+		
 		button[1].setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				calc(1);
-				Intent intent = new Intent(MainActivity.this,ImageActivity.class);
-				startActivity(intent);
 			}
 		});
 		button[2].setOnClickListener(new OnClickListener() {
